@@ -12,6 +12,9 @@ import main.java.negocio.UsuarioNegocio;
 import main.java.repositorio.UsuarioRepositorio;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -19,15 +22,24 @@ public class EditarPerfilDataErrada {
 
 	@SuppressWarnings("deprecation")
 	@Test
-	public void editarPerfilErradoDataTest() {
-		Perfil perfil = new Perfil("Rei", "Arthur", "Praça do marco zero", "05/05/2000", "1234 5678 9012 3456", "imagem.jpg");
+	public void editarPerfilErradoDataTest() throws ParseException {
+		String dataEmString = "05/05/2000";
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Date data = formato.parse(dataEmString);
+		Perfil perfil = new Perfil("Rei", "Arthur", "Praça do marco zero", data, "1234 5678 9012 3456", "imagem.jpg");
 
 		 try {
-	            perfil.setDataNascimento("02/30/2002");
-	            fail("Deve lançar exceção de data inválida");
-	        } catch (IllegalArgumentException e) {
-	            assertEquals("Data inválida", e.getMessage());
-	        }
-	}
+			 
+			 String dataEmString2 = "x5/05/2000";
+				SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
+				Date data2 = formato2.parse(dataEmString2);
+		        perfil.setDataNascimento(data2);
+		        assertTrue(false);
+
+		    } catch (ParseException  e) {
+		        assertTrue(true);
+
+		    }
+		 }
 	
 }

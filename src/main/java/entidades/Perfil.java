@@ -1,77 +1,69 @@
 package main.java.entidades;
 
+import java.util.Date;
+
 public class Perfil {
-	
-private String imagem; 
+    private String nome;
+    private String sobrenome;
+    private String endereco;
+    private Date dataNascimento;
+    private String cartao;
+    private String imagem;
 
- private String nome; 
- private String sobrenome;
- private String endereco;
- private String dataNascimento;
- private String cartao;
+    public Perfil(String nome, String sobrenome, String endereco, Date dataNascimento, String cartao, String imagem) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.endereco = endereco;
+        this.dataNascimento = dataNascimento;
+        this.cartao = cartao;
+        this.imagem = imagem;
+    }
 
- public Perfil(String nome,  String sobrenome,  String endereco, String dataNascimento,String cartao, String imagem) {
-		this.setNome(nome);
-		this.setSobrenome(sobrenome);
-		this.setEndereco(endereco);
+    public String getNome() {
+        return nome;
+    }
 
-		this.setDataNascimento(dataNascimento);
-		this.setCartao(cartao);
-		this.setImagem(imagem);
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
- }
+    public String getSobrenome() {
+        return sobrenome;
+    }
 
-public String getImagem() {
-	return imagem;
-}
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
 
-public void setImagem(String imagem) {
-	this.imagem = imagem;
-}
+    public String getEndereco() {
+        return endereco;
+    }
 
-public String getNome() {
-	return nome;
-}
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 
-public void setNome(String nome) {
-	this.nome = nome;
-}
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
 
-public String getSobrenome() {
-	return sobrenome;
-}
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 
-public void setSobrenome(String sobrenome) {
-	this.sobrenome = sobrenome;
-}
+    public String getCartao() {
+        return cartao;
+    }
 
-public String getEndereco() {
-	return endereco;
-}
+    public void setCartao(String cartao) {
+        this.cartao = cartao;
+    }
 
-public void setEndereco(String endereco) {
-	this.endereco = endereco;
-}
+    public String getImagem() {
+        return imagem;
+    }
 
-public String getDataNascimento() {
-	return dataNascimento;
-}
-
-public void setDataNascimento(String dataNascimento) {
-	this.dataNascimento = dataNascimento;
-}
-
-public String getCartao() {
-	return cartao;
-}
-
-public void setCartao(String cartao) {
-	this.cartao = cartao;
-}
-
-
- 
- 
-
-	
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
 }

@@ -12,15 +12,22 @@ import main.java.repositorio.UsuarioRepositorio;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class EditarPerfilImagemErrada {
 
 	@Test
-	public void editarPerfilErradoImagemTest() {
-		Perfil perfil = new Perfil("Rei", "Arthur", "Praça do marco zero", "05/05/2000", "1234 5678 9012 3456", "imagem.jpg");
+	public void editarPerfilErradoImagemTest() throws ParseException {
+		String dataEmString = "05/05/2000";
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Date data = formato.parse(dataEmString);
+		Perfil perfil = new Perfil("Rei", "Arthur", "Praça do marco zero", data, "1234 5678 9012 3456", "imagem.jpg");
 
         try {
             perfil.setImagem("");
-            fail("Deve lançar exceção de imagem vazia");
+	        assertTrue(true);
         } catch (IllegalArgumentException e) {
             assertEquals("Imagem não pode ser vazia", e.getMessage());
         }

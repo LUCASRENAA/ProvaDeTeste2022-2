@@ -4,6 +4,8 @@ import main.java.entidades.Usuario;
 import main.java.repositorio.UsuarioRepositorio;
 
 public class PostagemNegocio {
+
+
 	
 	
 //	

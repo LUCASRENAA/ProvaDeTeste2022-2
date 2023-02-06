@@ -17,6 +17,9 @@ public class PostagemRepositorio {
 		
 		return this.postagens.add(u);
 	}
-	
-	
+
+
+	public Boolean addPostagem(Postagem p) {
+		return this.postagens.add(p);
+	}
 }

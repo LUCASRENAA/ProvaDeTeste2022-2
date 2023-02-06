@@ -1,18 +1,30 @@
 package main.java.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Usuario {
 	
  private String nome; 
  private String senha;
  private String usuario;
  private String dataNascimento;
-
+ private List<Usuario> seguidores;
 
  public Usuario(String nome,  String senha,  String usuario, String dataNascimento) {
 	this.setNome(nome);
 	this.setSenha(senha);
 	this.setUsuario(usuario);
 	this.setDataNascimento(dataNascimento);
+	this.seguidores = new ArrayList<Usuario>();
+ }
+
+ public boolean seguir(Perfil perfil) {
+	 return true;
+ }
+
+ public boolean unfollow(Perfil perfil) {
+	 return true;
  }
 
 
@@ -55,5 +67,4 @@ public void setDataNascimento(String dataNascimento) {
 	this.dataNascimento = dataNascimento;
 }
 
-	
 }

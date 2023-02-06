@@ -2,6 +2,9 @@ package main.java.entidades;
 
 import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Perfil {
     private String nome;
     private String sobrenome;
@@ -9,6 +12,7 @@ public class Perfil {
     private Date dataNascimento;
     private String cartao;
     private String imagem;
+    private List<Perfil> seguidos;
 
     public Perfil(String nome, String sobrenome, String endereco, Date dataNascimento, String cartao, String imagem) {
         this.nome = nome;
@@ -17,6 +21,7 @@ public class Perfil {
         this.dataNascimento = dataNascimento;
         this.cartao = cartao;
         this.imagem = imagem;
+        this.seguidos = new ArrayList<Perfil>();
     }
 
     public String getNome() {

@@ -24,11 +24,11 @@ public class SeguirPerfil {
 
         //Criação de novo usuário e perfil
 
-        Usuario usuario = new Usuario("Lucas Henrique Ferreira Pavão", "df12@434C", "lucashenrique1@gmail.com", "15/06/1999");
+        Usuario u = new Usuario("Lucas Henrique Ferreira Pavão", "lucashenrique1@gmail.com", "df12@434C", "15/06/1999", "Rua Manoel do Carmo", "visa");
         Perfil perfil = new Perfil("Rei", "Arthur", "Praça do marco zero", data2, "1234 5678 9012 3456", "imagem.jpg");
 
         // Seguir o perfil
-        boolean followSuccessful = usuario.seguir(perfil);
+        boolean followSuccessful = u.seguir(perfil);
 
         // Ver se o ato de seguir foi bem-sucedido.
         assertTrue(followSuccessful);

@@ -21,7 +21,7 @@ public class Perfil {
         this.dataNascimento = dataNascimento;
         this.cartao = cartao;
         this.imagem = imagem;
-        this.seguidos = new ArrayList<Perfil>();
+        this.setSeguidos(new ArrayList<Perfil>());
     }
 
     public String getNome() {
@@ -71,4 +71,12 @@ public class Perfil {
     public void setImagem(String imagem) {
         this.imagem = imagem;
     }
+
+	public List<Perfil> getSeguidos() {
+		return seguidos;
+	}
+
+	public void setSeguidos(List<Perfil> seguidos) {
+		this.seguidos = seguidos;
+	}
 }

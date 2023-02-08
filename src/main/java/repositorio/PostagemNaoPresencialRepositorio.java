@@ -1,7 +1,5 @@
 package main.java.repositorio;
 
-import com.sun.deploy.net.MessageHeader;
-import main.java.entidades.Postagem;
 import main.java.entidades.PostagemNaoPresencial;
 
 import java.util.ArrayList;

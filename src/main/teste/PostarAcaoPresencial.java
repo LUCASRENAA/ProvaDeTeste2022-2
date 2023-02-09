@@ -1,5 +1,6 @@
 package main.teste;
 
+import main.java.negocio.PostagemNegocio;
 import main.java.entidades.Postagem;
 import main.java.repositorio.PostagemRepositorio;
 import org.junit.Test;
@@ -58,13 +59,11 @@ public class PostarAcaoPresencial {
             //Conversão da data em formato String para Date:
             Date date = format.parse(dateString);
 
-            //String com o texto da ação, inicialmente em branco:
+            //String com o texto da ação, em branco:
             String texto = "";
-            //Verificação se o texto da ação está vazio:
-            if (texto.isEmpty()) {
-                //Se estiver vazio, lança uma exceção com mensagem abaixo.
-                throw new IllegalArgumentException("Por favor, coloque um texto apresentando e descrevendo a ação.");
-            }
+
+            //Chamada do método para verificar se o texto está em branco:
+            PostagemNegocio.verifyTexto(texto);
 
             //Ao invés de inserir a string diretamente, coloca-se a String 'texto' declarada acima.
             Postagem p = new Postagem(texto, date, "Praça do Derby");
@@ -77,8 +76,7 @@ public class PostarAcaoPresencial {
         } catch (IllegalArgumentException e) {
             //Se lançar uma exceção com a mensagem "Por favor, coloque um texto apresentando e descrevendo a ação.":
             if (e.getMessage().equals("Por favor, coloque um texto apresentando e descrevendo a ação.")) {
-                System.out.println("Por favor, coloque um texto apresentando e descrevendo a ação.");
-                //Retorna sem fazer mais nada
+                //Retorna sem fazer mais nada.
                 return;
             } else {
                 //Se não, lança a exceção:
@@ -90,26 +88,23 @@ public class PostarAcaoPresencial {
         }
     }
 
+
     //Teste 3: Data em branco.
     @Test
     public void PostarAcaoPresencialDataTest() {
         String dateString = "";
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        if (dateString.isEmpty()) {
-            try {
-                throw new IllegalArgumentException("Por favor, insira uma data.");
-            } catch (IllegalArgumentException e) {
-                assertEquals("Por favor, insira uma data.", e.getMessage());
-                System.out.println("Por favor, insira uma data.");
-            }
-            return;
-        } try {
+
+        try {
+            PostagemNegocio.DateNotBlank(dateString);
             Date date = format.parse(dateString);
             Postagem p = new Postagem("Ola, queria sugerir um grupo para distribuir sopa na " +
                     "praca para moradores de rua", date, "Praça do Derby");
             PostagemRepositorio pr = new PostagemRepositorio();
             Boolean postou = pr.addPostagem(p);
             assertTrue(postou);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Por favor, insira uma data.", e.getMessage());
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -118,8 +113,6 @@ public class PostarAcaoPresencial {
     //Teste 4: Data inválida.
     @Test
     public void PostarAcaoPresencialDataInvalidaTest() {
-        //Cria uma instância da classe Date para guardar a data atual na variável dataAtual.
-        Date dataAtual = new Date();
         //Cria uma instância da classe SimpleDateFormat para formatar a data.
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         //Variável dateString armazena a data a ser comparada com a data atual.
@@ -127,11 +120,10 @@ public class PostarAcaoPresencial {
         try {
             //Cria uma instância da classe Date para guardar a data da postagem na variável postDate.
             Date postDate = format.parse(dateString);
-            //Verifica se a data da postagem é anterior a data atual.
-            if (postDate.before(dataAtual)) {
-                //Lança uma exceção com uma mensagem de erro caso a data seja inválida.
-                throw new IllegalArgumentException("Data inválida. Por favor, insira uma data posterior a hoje.");
-            }
+
+            //Chamada do método para verificar se a data é válida ou não.
+            PostagemNegocio.verificaDataValida(postDate);
+
             //Cria uma instância da classe Postagem com as informações da postagem.
             Postagem p = new Postagem("Ola, queria sugerir um grupo para distribuir sopa na praca " +
                     "para moradores de rua", postDate, "Praça do Derby");
@@ -143,8 +135,7 @@ public class PostarAcaoPresencial {
             assertTrue(postou);
         } catch (IllegalArgumentException e) {
             //Trata a exceção lançada na verificação da data.
-            if (e.getMessage().equals("Data inválida. Por favor, insira uma data posterior a hoje.")) {
-                System.out.println("Data inválida. Por favor, insira uma data posterior a hoje.");
+            if (e.getMessage().equals("Por favor, insira uma data válida.")) {
                 //Encerra o teste caso a data seja inválida.
                 return;
             } else {
@@ -165,9 +156,7 @@ public class PostarAcaoPresencial {
         try {
             Date date = format.parse(dateString);
             String local = "";
-            if (local.isEmpty()) {
-                throw new IllegalArgumentException("Por favor, insira um local para a ação presencial.");
-            }
+            PostagemNegocio.verificaLocalValido(local);
             Postagem p = new Postagem("Ola, queria sugerir um grupo para distribuir sopa na praca" +
                     " para moradores de rua", date, local);
             PostagemRepositorio pr = new PostagemRepositorio();
@@ -175,7 +164,6 @@ public class PostarAcaoPresencial {
             assertTrue(postou);
         } catch (IllegalArgumentException e) {
             assertEquals("Por favor, insira um local para a ação presencial.", e.getMessage());
-            System.out.println("Por favor, insira um local para a ação presencial.");
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

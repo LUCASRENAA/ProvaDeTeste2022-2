@@ -1,6 +1,7 @@
 package main.teste;
 
 import main.java.entidades.PostagemNaoPresencial;
+import main.java.negocio.PostagemNegocio;
 import main.java.repositorio.PostagemNaoPresencialRepositorio;
 import org.junit.Test;
 
@@ -59,11 +60,8 @@ public class PostarAcaoNaoPresencial {
             Date dataInicio = format.parse(dataInicioString);
             Date dataFinal = format.parse(dataFinalString);
 
-            // Verificação se a variável "texto" está vazia.
-            if (texto.isEmpty()) {
-                // Lançamento de exceção caso a variável esteja vazia.
-                throw new IllegalArgumentException("Por favor, coloque um texto apresentando e descrevendo a ação.");
-            }
+            //Chamada do método para verificar se o texto está em branco:
+            PostagemNegocio.verifyTexto(texto);
 
             // Criação de uma nova postagem do tipo "PostagemNaoPresencial".
             PostagemNaoPresencial pn = new PostagemNaoPresencial(texto, "3600", dataInicio, dataFinal);

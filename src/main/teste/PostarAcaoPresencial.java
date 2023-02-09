@@ -47,7 +47,7 @@ public class PostarAcaoPresencial {
         }
     }
 
-    // Teste 2: Mensagem em branco.
+    // Teste 2: Texto em branco.
     @Test
     public void PostarAcaoPresencialTextTest() {
         //String com a data da ação:
@@ -63,7 +63,7 @@ public class PostarAcaoPresencial {
             String texto = "";
 
             //Chamada do método para verificar se o texto está em branco:
-            PostagemNegocio.verifyTexto(texto);
+            PostagemNegocio.verificaTexto(texto);
 
             //Ao invés de inserir a string diretamente, coloca-se a String 'texto' declarada acima.
             Postagem p = new Postagem(texto, date, "Praça do Derby");
@@ -88,7 +88,6 @@ public class PostarAcaoPresencial {
         }
     }
 
-
     //Teste 3: Data em branco.
     @Test
     public void PostarAcaoPresencialDataTest() {
@@ -96,7 +95,7 @@ public class PostarAcaoPresencial {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
         try {
-            PostagemNegocio.DateNotBlank(dateString);
+            PostagemNegocio.verificaDataEmBranco(dateString);
             Date date = format.parse(dateString);
             Postagem p = new Postagem("Ola, queria sugerir um grupo para distribuir sopa na " +
                     "praca para moradores de rua", date, "Praça do Derby");
@@ -168,5 +167,4 @@ public class PostarAcaoPresencial {
             throw new RuntimeException(e);
         }
     }
-
 }

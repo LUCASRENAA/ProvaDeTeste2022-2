@@ -61,7 +61,7 @@ public class PostarAcaoNaoPresencial {
             Date dataFinal = format.parse(dataFinalString);
 
             //Chamada do método para verificar se o texto está em branco:
-            PostagemNegocio.verifyTexto(texto);
+            PostagemNegocio.verificaTexto(texto);
 
             // Criação de uma nova postagem do tipo "PostagemNaoPresencial".
             PostagemNaoPresencial pn = new PostagemNaoPresencial(texto, "3600", dataInicio, dataFinal);
@@ -78,7 +78,6 @@ public class PostarAcaoNaoPresencial {
             // Verificação se a exceção lançada é a esperada.
             assertEquals("Por favor, coloque um texto apresentando e " +
                     "descrevendo a ação.", e.getMessage());
-            System.out.println("Por favor, coloque um texto apresentando e descrevendo a ação.");
         }
     }
 
@@ -96,11 +95,8 @@ public class PostarAcaoNaoPresencial {
             Date dataInicio = format.parse(dataInicioString);
             Date dataFinal = format.parse(dataFinalString);
 
-            //Checando se o que tem em 'valorTotal' é válido:
-            int valor = Integer.parseInt(valorTotal);
-            if (valor <= 0) {
-                throw new IllegalArgumentException("Por favor, insira um valor válido para arrecadar.");
-            }
+            //Chamando o método para verificar se o valor é válido:
+            PostagemNegocio.verificaValorValido(valorTotal);
 
             //Criando nova postagem Nao Presencial:
             PostagemNaoPresencial pn = new PostagemNaoPresencial("Ola, queria pedir ajuda " +
@@ -112,25 +108,22 @@ public class PostarAcaoNaoPresencial {
             throw new RuntimeException(e);
         } catch (IllegalArgumentException e) {
             assertEquals("Por favor, insira um valor válido para arrecadar.", e.getMessage());
-            System.out.println("Por favor, insira um valor válido para arrecadar.");
         }
     }
 
-    //Teste 4: Postagem com Valor em Branco
+    // Teste 4: Postagem com Valor em Branco
     @Test
     public void PostarAcaoNaoPresencialValor2Test() {
         String dataInicioString = "22-12-2022";
         String dataFinalString = "31-12-2022";
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        String valorTotal = ""; //String com o valor que será inserido, dessa vez vazio.
+        String valorTotal = ""; // String com o valor que será inserido, dessa vez vazio.
         try {
             Date dataInicio = format.parse(dataInicioString);
             Date dataFinal = format.parse(dataFinalString);
 
-            //Checando se o que tem em 'valorTotal' está vazio:
-            if (valorTotal.isEmpty()) {
-                throw new IllegalArgumentException("Por favor, insira um valor a ser arrecadado.");
-            }
+            //Chamando o método para verificar se o valor está em branco:
+            PostagemNegocio.verificarValorEmBranco(valorTotal);
 
             //Criando nova postagem Nao Presencial:
             PostagemNaoPresencial pn = new PostagemNaoPresencial("Ola, queria pedir ajuda para pagar uma cirurgia do meu " +
@@ -142,18 +135,17 @@ public class PostarAcaoNaoPresencial {
             throw new RuntimeException(e);
         } catch (IllegalArgumentException e) {
             assertEquals("Por favor, insira um valor a ser arrecadado.", e.getMessage());
-            System.out.println("Por favor, insira um valor a ser arrecadado.");
         }
     }
 
     //Teste 5: Postagem com Data errada.
     @Test
     public void PostarAcaoNaoPresencialDatasTest() {
-        //String dataInicioString = "22-02-2022";
-        //String dataFinalString = "22-12-2023"; //Erro 'data inicial anterior a data atual'.
+        String dataInicioString = "22-02-2022";
+        String dataFinalString = "22-12-2023"; //Erro 'data inicial anterior a data atual'.
 
-        String dataInicioString = "22-03-2023";
-        String dataFinalString = "22-02-2023"; //Erro 'data final anterior a data inicial'.
+        //String dataInicioString = "22-03-2023";
+        //String dataFinalString = "22-02-2023"; //Erro 'data final anterior a data inicial'.
 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -161,15 +153,8 @@ public class PostarAcaoNaoPresencial {
             Date dataInicio = format.parse(dataInicioString);
             Date dataFinal = format.parse(dataFinalString);
 
-            //Verificando se a data inicial é anterior a data atual:
-            if (dataInicio.before(new Date())) {
-                throw new IllegalArgumentException("A data inicial não pode ser anterior a data atual.");
-            }
-
-            //Verificando se a data final é anterior a data inicial:
-            if (dataFinal.before(dataInicio)) {
-                throw new IllegalArgumentException("A data final não pode ser anterior a data inicial.");
-            }
+            PostagemNegocio.verificaDataInicio(dataInicio);
+            PostagemNegocio.verificaDataFinal(dataInicio, dataFinal);
 
             //Criando nova postagem Nao Presencial:
             PostagemNaoPresencial pn = new PostagemNaoPresencial("Ola, queria pedir ajuda para pagar uma " +
@@ -180,14 +165,7 @@ public class PostarAcaoNaoPresencial {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         } catch (IllegalArgumentException e) {
-
-            /* Verificando qual das duas exceções de data ocorreu (inicial anterior a atual
-            ou final anterior a inicial) e vendo a mensagem de exceção correta. */
-
-            if (!e.getMessage().equals("A data final não pode ser anterior a data inicial.") &&
-                    !e.getMessage().equals("A data inicial não pode ser anterior a data atual.")) {
-                throw e;
-            }
+            System.out.println(e.getMessage());
         }
     }
 }

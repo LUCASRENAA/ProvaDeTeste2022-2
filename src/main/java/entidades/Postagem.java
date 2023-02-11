@@ -3,7 +3,16 @@ import java.util.Date;
 
 public class Postagem {
     private String texto;
-    private Date data;
+    private String nome;
+    public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	private Date data;
     private String local;
     private int contador = 0;
 

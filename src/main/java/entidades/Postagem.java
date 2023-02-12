@@ -4,14 +4,7 @@ import java.util.Date;
 public class Postagem {
     private String texto;
     private String nome;
-    public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
+    private int curtir = 0;
 	private Date data;
     private String local;
     private int contador = 0;
@@ -29,6 +22,13 @@ public class Postagem {
     public void setTexto(String texto) {
         this.texto = texto;
     }
+    public String getNome() {
+  		return nome;
+  	}
+
+  	public void setNome(String nome) {
+  		this.nome = nome;
+  	}
 
     public Date getData() {
         return data;
@@ -57,4 +57,18 @@ public class Postagem {
     public void deixarDeParticiparDaAcao() {
         contador--;
     }
+
+	public int getCurtir() {
+		return curtir;
+	}
+
+	public void setCurtir(int curtir) {
+		this.curtir = curtir;
+	}
+	public void curtirAcao() {
+		curtir++;
+	}
+	public void descurtirAcao() {
+		curtir--;
+	}
 }
